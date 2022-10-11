@@ -9,7 +9,7 @@ add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_rxctl
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_rxd
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_txck
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_txctl
-add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_txd
+add wave -noupdate -group TX_eth -expand /eth_tb/i_eth_rgmii_tx/eth_txd
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_rst_n
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/phy_tx_clk_i
 add wave -noupdate -group TX_eth /eth_tb/i_eth_rgmii_tx/eth_irq
@@ -96,6 +96,241 @@ add wave -noupdate -group framing_tx /eth_tb/i_eth_rgmii_tx/eth_rgmii/rx_wr
 add wave -noupdate -group framing_tx /eth_tb/i_eth_rgmii_tx/eth_rgmii/douta
 add wave -noupdate -group framing_tx /eth_tb/i_eth_rgmii_tx/eth_rgmii/tx_fcs_reg
 add wave -noupdate -group framing_tx /eth_tb/i_eth_rgmii_tx/eth_rgmii/rx_fcs_reg
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/clka
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/clkb
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/dina
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/dinb
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/addra
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/addrb
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/wea
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/web
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/ena
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/enb
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/douta
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/doutb
+add wave -noupdate -group framing_tx -group RAM_TX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/dout
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[1]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_TX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_tx/genblk1[0]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/clka
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/clkb
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/dina
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/dinb
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/addra
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/addrb
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/wea
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/web
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/ena
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/enb
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/douta
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/doutb
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/dout0
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/dout1
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/we0
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/we1
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/en0
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/en1
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/din0
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/din1
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/addra_dly
+add wave -noupdate -group framing_tx -group RAM_RX /eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/addrb_dly
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[7]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[6]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[5]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[4]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[3]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[2]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[1]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/clkA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/clkB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/weA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/weB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/enaA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/enaB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/addrA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/addrB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/diA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/diB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/doA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/doB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/readA}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/readB}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/log2}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/value}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/shifted}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/log2/res}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/portA/i}
+add wave -noupdate -group framing_tx -group RAM_RX {/eth_tb/i_eth_rgmii_tx/eth_rgmii/RAMB16_inst_rx/genblk1[0]/asym_ram_tdp_read_first_inst/portA/lsbaddr}
 add wave -noupdate -group RX_eth /eth_tb/i_eth_rgmii_rx/clk_i
 add wave -noupdate -group RX_eth /eth_tb/i_eth_rgmii_rx/clk_200MHz_i
 add wave -noupdate -group RX_eth /eth_tb/i_eth_rgmii_rx/rst_ni
@@ -193,9 +428,9 @@ add wave -noupdate -group framing_rx /eth_tb/i_eth_rgmii_rx/eth_rgmii/douta
 add wave -noupdate -group framing_rx /eth_tb/i_eth_rgmii_rx/eth_rgmii/tx_fcs_reg
 add wave -noupdate -group framing_rx /eth_tb/i_eth_rgmii_rx/eth_rgmii/rx_fcs_reg
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {304 ns} 0}
+WaveRestoreCursors {{Cursor 1} {66 ns} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 180
+configure wave -namecolwidth 457
 configure wave -valuecolwidth 128
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -209,4 +444,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {84 ns} {564 ns}
+WaveRestoreZoom {0 ns} {208 ns}
