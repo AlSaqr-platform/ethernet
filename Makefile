@@ -78,3 +78,13 @@ benderrun_macro: libbender $(util) $(library)
 libbender:
 	vlib work
 	vmap work ./work
+
+clean:
+	rm -f *.log
+	rm -f transcript
+	rm -f modelsim.ini
+	rm -f compile.tcl
+	rm -rf work
+	rm -f vsim.wlf
+
+all: clean scripts_tb build run
