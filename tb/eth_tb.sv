@@ -9,11 +9,11 @@ module eth_tb;
    parameter DW = 64;  //Data width
    parameter IW = 8;   //ID width
    parameter UW = 8;   //User width
-   
+
    localparam tCK    = 1ns;
    localparam tCK200 = 5ns;
    localparam tCK125 = 8ns;
-   
+
    logic s_clk           = 0;
    logic s_clk_200MHz    = 0;
    logic s_clk_125MHz_0  = 0;
@@ -30,35 +30,35 @@ module eth_tb;
    wire [3:0] eth_txd;
    wire       eth_tx_rst_n;
    wire       eth_rx_rst_n;
-   
+
    //------------------------ AXI drivers --------------------------
-   
+
    AXI_BUS_DV
      #(
        .AXI_ADDR_WIDTH(AW),
        .AXI_DATA_WIDTH(DW),
        .AXI_ID_WIDTH(IW),
        .AXI_USER_WIDTH(UW)
-       ) 
+       )
    axi_master_tx_dv(s_clk), axi_master_rx_dv(s_clk);
-   
+
    AXI_BUS
      #(
        .AXI_ADDR_WIDTH(AW),
        .AXI_DATA_WIDTH(DW),
        .AXI_ID_WIDTH(IW),
        .AXI_USER_WIDTH(UW)
-       ) 
+       )
    axi_master_tx(),axi_master_rx();
-   
+
    `AXI_ASSIGN(axi_master_tx, axi_master_tx_dv)
    `AXI_ASSIGN(axi_master_rx, axi_master_rx_dv)
-   
+
    typedef axi_test::axi_driver #(.AW(AW), .DW(DW), .IW(IW), .UW(UW), .TA(200ps), .TT(700ps)) axi_drv_t;
    axi_drv_t axi_master_tx_drv =  new(axi_master_tx_dv);
    axi_drv_t axi_master_rx_drv =  new(axi_master_rx_dv);
 
-   
+
    // ---------------------------- DUT -----------------------------
    // TX ETH_RGMII
    eth_rgmii
@@ -74,17 +74,17 @@ module eth_tb;
       .clk_200MHz_i    ( s_clk_200MHz      ),
       .rst_ni          ( s_rst_n           ),
       .eth_clk_i       ( s_clk_125MHz_90   ), //90
-      
+
       .ethernet        ( axi_master_tx     ),
-      
+
       .eth_rxck        ( eth_rxck          ),
       .eth_rxctl       ( eth_rxctl         ),
       .eth_rxd         ( eth_rxd           ),
-      
+
       .eth_txck        ( eth_txck          ),
       .eth_txctl       ( eth_txctl         ),
       .eth_txd         ( eth_txd           ),
-      
+
       .eth_rst_n       ( eth_tx_rst_n      ),
       .phy_tx_clk_i    ( s_clk_125MHz_0    ) //0
       );
@@ -102,18 +102,18 @@ module eth_tb;
       .clk_i           ( s_clk             ),
       .clk_200MHz_i    ( s_clk_200MHz      ),
       .rst_ni          ( s_rst_n           ),
-      
+
       .eth_clk_i       ( s_clk_125MHz_90   ), // 90
       .ethernet        ( axi_master_rx     ),
-      
+
       .eth_rxck        ( eth_txck          ),
       .eth_rxctl       ( eth_txctl         ),
       .eth_rxd         ( eth_txd           ),
-      
+
       .eth_txck        ( eth_rxck          ),
       .eth_txctl       ( eth_rxctl         ),
       .eth_txd         ( eth_rxd           ),
-      
+
       .eth_rst_n       ( eth_rx_rst_n      ),
       .phy_tx_clk_i    ( s_clk_125MHz_0    ) //0
       );
@@ -165,21 +165,20 @@ module eth_tb;
 
    event       tx_complete;
    logic       en_rx_memw;
-  // assign en_rx_memw = i_eth_rgmii_rx.eth_rgmii.RAMB16_inst_rx.genblk1[0].asym_ram_tdp_read_first_inst.enaB;
-   assign en_rx_memw = i_eth_rgmii_rx.eth_rgmii.RAMB16_inst_rx.genblk1[0].GF22_wrap_rx_inst.enaB;
-   
-   
+   assign en_rx_memw = i_eth_rgmii_rx.eth_rgmii.RAMB16_inst_rx.genblk1[0].mem_wrap_rx_inst.enaB;
+
+
    // ---------------------- CLOCK GENERATION ------------------------
-   
+
    initial begin
       while (!done) begin //SYSTEM CLOCK
-	       s_clk <= 1; 
+	       s_clk <= 1;
 	       #(tCK/2);
 	       s_clk <= 0;
 	       #(tCK/2);
       end
    end
-   
+
    initial begin
       while (!done) begin
 	       s_clk_200MHz <= 1;
@@ -187,8 +186,8 @@ module eth_tb;
 	       s_clk_200MHz <= 0;
 	       #(tCK200/2);
       end
-   end 
-   
+   end
+
    initial begin
       while (!done) begin
 	       s_clk_125MHz_0 <= 1;
@@ -197,7 +196,7 @@ module eth_tb;
 	       #(tCK125/2);
       end
    end
-   
+
    initial begin
       while (!done) begin
 	       s_clk_125MHz_90 <= 0;
@@ -205,11 +204,11 @@ module eth_tb;
 	       s_clk_125MHz_90 <= 1;
 	         #(tCK125/2);
       end
-   end 
+   end
 
 
    // ------------------------ BEGINNING OF SIMULATION ------------------------
-   
+
    initial begin
 
       // General reset
@@ -224,24 +223,24 @@ module eth_tb;
       repeat(5) @(posedge s_clk);
 
       #3000ns;
-      
-      
+
+
       // Packet length
       fix.write_axi(axi_master_tx_drv,'h00000810,'h00000040, 'h0f);
       repeat(5) @(posedge s_clk);
-      
+
       // TX BUFFER FILLING ----------------------------------------------
       for(int j=0; j<8; j++) begin
          fix.write_axi(axi_master_tx_drv, write_addr[j], data_array[j], 'hff);
          @(posedge s_clk);
       end
       repeat(10) @(posedge s_clk);
-      
-      // TRANSMISSION OF PACKET ----------------------------------------- 
+
+      // TRANSMISSION OF PACKET -----------------------------------------
       // 1 --> mac_address[31:0]
       fix.write_axi(axi_master_tx_drv,'h00000800,'h00890702, 'h0f);
       @(posedge s_clk);
-      
+
       // 2 --> {irq_en,promiscuous,spare,loopback,cooked,mac_address[47:32]}
       fix.write_axi(axi_master_tx_drv,'h00000808,'h00002301, 'h0f);
       @(posedge s_clk);
@@ -249,7 +248,7 @@ module eth_tb;
       // 3 --> Rx frame check sequence register(read) and last register(write)
       fix.write_axi(axi_master_tx_drv,'h00000828,'h00000008, 'h0f);
       @(posedge s_clk);
-     
+
    end
 
    // -------------- CHECK IF RECEIVED DATA == TRANSMITTED DATA ----------------
@@ -262,15 +261,15 @@ module eth_tb;
       end
    end
 
-   // Check if the data received and stored in the rx memory matches the transmitted data 
+   // Check if the data received and stored in the rx memory matches the transmitted data
    initial begin
       while(1) begin
          wait(tx_complete.triggered);
-         
+
          for(int i=0; i<8; i++) begin
             fix.read_axi(axi_master_rx_drv, read_addr[i]);
             if(rx_read_data == data_array[i]) $display("Dato corretto");
-            else begin 
+            else begin
                $display("Dato sbagliato");
                $stop();
             end
@@ -278,6 +277,6 @@ module eth_tb;
          $stop();
       end
    end
-   
-   
+
+
 endmodule

@@ -15,12 +15,12 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
    genvar r;
    wire [47:0]        dout;
 
-/*   
+/*
 `ifndef verilator
  `define RAMB16
 `endif
 */
-   
+
 `ifdef GENESYSII
  `define RAMB16
 `endif
@@ -56,10 +56,10 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
 
  //`ifdef GF22_BEHAV
    // RAM BEHAVIOURAL GF22
-   
+
     generate for (r = 0; r < 2; r=r+1)
-      
-        GF22_wrap_tx GF22_wrap_tx_inst
+
+        mem_wrap_tx mem_wrap_tx_inst
           (
            .clkA  ( clka             ),
            .clkB  ( clkb             ),
@@ -71,43 +71,10 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
            .diB   ( dinb[r*32 +: 32] ), // port B is write only
            .doA   ( douta[r*8 +: 8]  )  // port A is read only
            );
-       
+
      endgenerate
-   
- //`elif
-     // BEHAVIOURAL RAMB16 XILINX
-  /* generate for (r = 0; r < 2; r=r+1)
-     
-     asym_ram_tdp_read_first
-       #(
-	 .WIDTHA(32),
-	 .SIZEA(512),
-	 .ADDRWIDTHA(9),
-	 .WIDTHB(8),
-	 .SIZEB(2048),
-	 .ADDRWIDTHB(11) 
-	 )
-     asym_ram_tdp_read_first_inst
-       (
-        .clkA   ( clkb                     ),     // Port A Clock
-        .doA    ( doutb[r*32 +: 32]        ),     // Port A 32-bit Data Output
-        .addrA  ( addrb                    ),     // Port A 9-bit Address Input
-        .diA    ( dinb[r*32 +: 32]         ),     // Port A 32-bit Data Input
-        .enaA   ( enb                      ),     // Port A RAM Enable Input
-        .weA    ( web[r]                   ),     // Port A Write Enable Input
-        .clkB   ( clka                     ),     // Port B Clock
-        .doB    ( douta[r*8 +: 8]          ),     // Port B 8-bit Data Output
-        .addrB  ( addra                    ),     // Port B 11-bit Address Input
-        .diB    ( dina[r*8 +: 8]           ),     // Port B 8-bit Data Input
-        .enaB   ( ena                      ),     // Port B RAM Enable Input
-        .weB    ( wea[r]                   )      // Port B Write Enable Input
-        );
-      
-   endgenerate*/
-   
-// `endif //  `ifdef GF22_BEHAV
-   
+
 `endif // !`ifdef RAMB16
-   
-   
+
+
 endmodule // dualmem
