@@ -43,7 +43,7 @@ scripts_tb:
 scripts_macro:
 	$(BENDER) script vsim \
 		--vlog-arg="$(compile_flag) -work  $(library) -suppress 2583 " --vcom-arg="$(compile_flag_vhd)  -work  $(library) -pedanticerrors" \
-    -t macro -t eth_test > compile.tcl
+    -t gf22_macro -t eth_test > compile.tcl
 
 build: bendertb
 	vopt $(compile_flag) -suppress 3053 -suppress 8885 -work $(library)  $(top_level) -o $(top_level)_optimized +acc -check_synthesis
