@@ -20,13 +20,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-origin	https://github.com/alexforencich/verilog-ethernet.git
+origin  https://github.com/alexforencich/verilog-ethernet.git
 commit ebe31e811cee9db615a7d5ec8472f972f3368b90
 Author: Alex Forencich <alex@alexforencich.com>
 Date:   Thu Nov 8 13:15:47 2018 -0800
 
 Modified by Jonathan Kimmitt to extract CRC bytes
- 
+
 lfsr submodule renamed rgmii_lfsr to avoid name clash with main project
 */
 
@@ -246,7 +246,7 @@ always @* begin
     end
 end
 
-always @(posedge clk) begin
+always_ff @(posedge clk or posedge rst) begin
     if (rst) begin
         state_reg <= STATE_IDLE;
 
@@ -313,11 +313,9 @@ always @(posedge clk) begin
             end
         end
     end
+end
 
-    m_axis_tdata_reg <= m_axis_tdata_next;
-    m_axis_tlast_reg <= m_axis_tlast_next;
-    m_axis_tuser_reg <= m_axis_tuser_next;
-
+always_ff @(posedge clk) begin
     // delay input
     if (clk_enable) begin
         if (mii_select) begin
@@ -350,6 +348,14 @@ always @(posedge clk) begin
             gmii_rx_er_d3 <= gmii_rx_er_d2;
             gmii_rx_er_d4 <= gmii_rx_er_d3;
         end
+
+        m_axis_tdata_reg <= m_axis_tdata_next;
+        m_axis_tlast_reg <= m_axis_tlast_next;
+        m_axis_tuser_reg <= m_axis_tuser_next;
+    end else begin
+        m_axis_tdata_reg <= m_axis_tdata_next;
+        m_axis_tlast_reg <= m_axis_tlast_next;
+        m_axis_tuser_reg <= m_axis_tuser_next;
     end
 end
 
