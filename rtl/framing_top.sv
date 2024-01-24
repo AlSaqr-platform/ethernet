@@ -1,6 +1,6 @@
 
 // See LICENSE for license details.
-`ifdef GENESYSII
+`ifdef FPGA_EMUL
  `default_nettype none
 `endif
 
@@ -398,6 +398,6 @@ xlnx_ila_3 eth_ila_clk_msoc (
 
 endmodule // framing_top
 
-`ifdef GENESYSII
- `default_nettype none
+`ifdef FPGA_EMUL
+ `default_nettype wire
 `endif

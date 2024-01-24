@@ -95,6 +95,19 @@ if (TARGET == "XILINX") begin
                 .R(1'b0),
                 .S(1'b0)
             );
+        end else if (IODDR_STYLE == "IODDR1") begin
+            IDDRE1 #(
+                .DDR_CLK_EDGE("SAME_EDGE_PIPELINED"),
+                .IS_CB_INVERTED(1'b1),
+                .IS_C_INVERTED(1'b0)
+            ) iddr_inst (
+                .Q1(q1[n]),
+                .Q2(q2[n]),
+                .C(clk),
+                .CB(clk),
+                .D(d[n]),
+                .R(1'b0)
+            );
         end
     end
 end else if (TARGET == "ALTERA") begin

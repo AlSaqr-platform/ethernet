@@ -57,91 +57,109 @@ module ssio_ddr_in
 wire clk_int;
 wire clk_io;
 
-generate
 
-if (TARGET == "XILINX") begin
+`ifdef GENESYSII
+    generate
 
-    // use Xilinx clocking primitives
+    if (TARGET == "XILINX") begin
 
-    if (CLOCK_INPUT_STYLE == "BUFG") begin
+        // use Xilinx clocking primitives
 
-        // buffer RX clock
-        BUFG
-        clk_bufg (
-            .I(input_clk),
-            .O(clk_int)
-        );
+        if (CLOCK_INPUT_STYLE == "IBUF") begin
 
-        // pass through RX clock to logic and input buffers
-        assign clk_io = clk_int;
-        assign output_clk = clk_int;
+            // buffer RX clock
 
-    end else if (CLOCK_INPUT_STYLE == "BUFR") begin
+            IBUF #(
+                .IBUF_LOW_PWR ("FALSE")
+            )
+            clk_bufio (
+                .I(input_clk),
+                .O(clk_int)
+            );
 
-        assign clk_int = input_clk;
+            // pass through RX clock to logic and input buffers
+            assign clk_io = clk_int;
+            assign output_clk = clk_int;
+
+        end else if (CLOCK_INPUT_STYLE == "BUFR") begin
+
+            assign clk_int = input_clk;
+
+            // pass through RX clock to input buffers
+            BUFIO
+            clk_bufio (
+                .I(clk_int),
+                .O(clk_io)
+            );
+
+            // pass through RX clock to logic
+            BUFR #(
+                .BUFR_DIVIDE("BYPASS")
+            )
+            clk_bufr (
+                .I(clk_int),
+                .O(output_clk),
+                .CE(1'b1),
+                .CLR(1'b0)
+            );
+            
+        end else if (CLOCK_INPUT_STYLE == "BUFIO") begin
+
+            assign clk_int = input_clk;
+
+            // pass through RX clock to input buffers
+            BUFIO
+            clk_bufio (
+                .I(clk_int),
+                .O(clk_io)
+            );
+
+            // pass through RX clock to MAC
+            BUFG
+            clk_bufg (
+                .I(clk_int),
+                .O(output_clk)
+            );
+
+        end else if (CLOCK_INPUT_STYLE == "BUFIO2") begin
+
+            // pass through RX clock to input buffers
+            BUFIO2 #(
+                .DIVIDE(1),
+                .DIVIDE_BYPASS("TRUE"),
+                .I_INVERT("FALSE"),
+                .USE_DOUBLER("FALSE")
+            )
+            clk_bufio (
+                .I(input_clk),
+                .DIVCLK(clk_int),
+                .IOCLK(clk_io),
+                .SERDESSTROBE()
+            );
+
+            // pass through RX clock to MAC
+            BUFG
+            clk_bufg (
+                .I(clk_int),
+                .O(output_clk)
+            );
+
+        end
+
+    end else begin
 
         // pass through RX clock to input buffers
-        BUFIO
-        clk_bufio (
-            .I(clk_int),
-            .O(clk_io)
-        );
+        assign clk_io = input_clk;
 
         // pass through RX clock to logic
-        BUFR #(
-            .BUFR_DIVIDE("BYPASS")
-        )
-        clk_bufr (
-            .I(clk_int),
-            .O(output_clk),
-            .CE(1'b1),
-            .CLR(1'b0)
-        );
-        
-    end else if (CLOCK_INPUT_STYLE == "BUFIO") begin
-
         assign clk_int = input_clk;
-
-        // pass through RX clock to input buffers
-        BUFIO
-        clk_bufio (
-            .I(clk_int),
-            .O(clk_io)
-        );
-
-        // pass through RX clock to MAC
-        BUFG
-        clk_bufg (
-            .I(clk_int),
-            .O(output_clk)
-        );
-
-    end else if (CLOCK_INPUT_STYLE == "BUFIO2") begin
-
-        // pass through RX clock to input buffers
-        BUFIO2 #(
-            .DIVIDE(1),
-            .DIVIDE_BYPASS("TRUE"),
-            .I_INVERT("FALSE"),
-            .USE_DOUBLER("FALSE")
-        )
-        clk_bufio (
-            .I(input_clk),
-            .DIVCLK(clk_int),
-            .IOCLK(clk_io),
-            .SERDESSTROBE()
-        );
-
-        // pass through RX clock to MAC
-        BUFG
-        clk_bufg (
-            .I(clk_int),
-            .O(output_clk)
-        );
+        assign output_clk = clk_int;
 
     end
 
-end else begin
+    endgenerate
+
+`else /* `ifdef GENESYSII */
 
     // pass through RX clock to input buffers
     assign clk_io = input_clk;
@@ -150,9 +168,7 @@ end else begin
     assign clk_int = input_clk;
     assign output_clk = clk_int;
 
-end
-
-endgenerate
+`endif
 
 iddr #(
     .TARGET(TARGET),

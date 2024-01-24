@@ -97,6 +97,18 @@ if (TARGET == "XILINX") begin
                 .R(1'b0),
                 .S(1'b0)
             );
+        end else if (IODDR_STYLE == "IODDR1") begin
+            ODDRE1 #(
+                .IS_C_INVERTED(1'b0),
+                .SIM_DEVICE("ULTRASCALE_PLUS")
+            )
+            oddr_inst (
+                .Q(q[n]),
+                .C(clk),
+                .D1(d1[n]),
+                .D2(d2[n]),
+                .SR(1'b0)
+                );
         end
     end
 end else if (TARGET == "ALTERA") begin

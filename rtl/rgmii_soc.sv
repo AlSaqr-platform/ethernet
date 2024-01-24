@@ -82,112 +82,272 @@ wire [3:0] phy_rxd_delay;
 wire       phy_rx_ctl_delay;
 
 `ifdef GENESYSII
-   
-IDELAYCTRL
-idelayctrl_inst
-(
-    .REFCLK(clk_200_int),
-    .RST(rst_int),
-    .RDY()
-);
+    IDELAYCTRL idelayctrl_inst
+    (
+        .REFCLK(clk_200_int),
+        .RST(rst_int),
+        .RDY()
+    );
 
-IDELAYE2 #(
-    .IDELAY_TYPE("FIXED")
-)
-phy_rxd_idelay_0
-(
-    .IDATAIN(phy_rxd[0]),
-    .DATAOUT(phy_rxd_delay[0]),
-    .DATAIN(1'b0),
-    .C(1'b0),
-    .CE(1'b0),
-    .INC(1'b0),
-    .CINVCTRL(1'b0),
-    .CNTVALUEIN(5'd0),
-    .CNTVALUEOUT(),
-    .LD(1'b0),
-    .LDPIPEEN(1'b0),
-    .REGRST(1'b0)
-);
+    IDELAYE2 #(
+        .IDELAY_TYPE("FIXED")
+    )
+    phy_rxd_idelay_0
+    (
+        .IDATAIN(phy_rxd[0]),
+        .DATAOUT(phy_rxd_delay[0]),
+        .DATAIN(1'b0),
+        .C(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CINVCTRL(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LD(1'b0),
+        .LDPIPEEN(1'b0),
+        .REGRST(1'b0)
+    );
 
-IDELAYE2 #(
-    .IDELAY_TYPE("FIXED")
-)
-phy_rxd_idelay_1
-(
-    .IDATAIN(phy_rxd[1]),
-    .DATAOUT(phy_rxd_delay[1]),
-    .DATAIN(1'b0),
-    .C(1'b0),
-    .CE(1'b0),
-    .INC(1'b0),
-    .CINVCTRL(1'b0),
-    .CNTVALUEIN(5'd0),
-    .CNTVALUEOUT(),
-    .LD(1'b0),
-    .LDPIPEEN(1'b0),
-    .REGRST(1'b0)
-);
+    IDELAYE2 #(
+        .IDELAY_TYPE("FIXED")
+    )
+    phy_rxd_idelay_1
+    (
+        .IDATAIN(phy_rxd[1]),
+        .DATAOUT(phy_rxd_delay[1]),
+        .DATAIN(1'b0),
+        .C(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CINVCTRL(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LD(1'b0),
+        .LDPIPEEN(1'b0),
+        .REGRST(1'b0)
+    );
 
-IDELAYE2 #(
-    .IDELAY_TYPE("FIXED")
-)
-phy_rxd_idelay_2
-(
-    .IDATAIN(phy_rxd[2]),
-    .DATAOUT(phy_rxd_delay[2]),
-    .DATAIN(1'b0),
-    .C(1'b0),
-    .CE(1'b0),
-    .INC(1'b0),
-    .CINVCTRL(1'b0),
-    .CNTVALUEIN(5'd0),
-    .CNTVALUEOUT(),
-    .LD(1'b0),
-    .LDPIPEEN(1'b0),
-    .REGRST(1'b0)
-);
+    IDELAYE2 #(
+        .IDELAY_TYPE("FIXED")
+    )
+    phy_rxd_idelay_2
+    (
+        .IDATAIN(phy_rxd[2]),
+        .DATAOUT(phy_rxd_delay[2]),
+        .DATAIN(1'b0),
+        .C(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CINVCTRL(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LD(1'b0),
+        .LDPIPEEN(1'b0),
+        .REGRST(1'b0)
+    );
 
-IDELAYE2 #(
-    .IDELAY_TYPE("FIXED")
-)
-phy_rxd_idelay_3
-(
-    .IDATAIN(phy_rxd[3]),
-    .DATAOUT(phy_rxd_delay[3]),
-    .DATAIN(1'b0),
-    .C(1'b0),
-    .CE(1'b0),
-    .INC(1'b0),
-    .CINVCTRL(1'b0),
-    .CNTVALUEIN(5'd0),
-    .CNTVALUEOUT(),
-    .LD(1'b0),
-    .LDPIPEEN(1'b0),
-    .REGRST(1'b0)
-);
+    IDELAYE2 #(
+        .IDELAY_TYPE("FIXED")
+    )
+    phy_rxd_idelay_3
+    (
+        .IDATAIN(phy_rxd[3]),
+        .DATAOUT(phy_rxd_delay[3]),
+        .DATAIN(1'b0),
+        .C(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CINVCTRL(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LD(1'b0),
+        .LDPIPEEN(1'b0),
+        .REGRST(1'b0)
+    );
 
-IDELAYE2 #(
-    .IDELAY_VALUE(0),
-    .IDELAY_TYPE("FIXED")
-)
-phy_rx_ctl_idelay
-(
-    .IDATAIN(phy_rx_ctl),
-    .DATAOUT(phy_rx_ctl_delay),
-    .DATAIN(1'b0),
-    .C(1'b0),
-    .CE(1'b0),
-    .INC(1'b0),
-    .CINVCTRL(1'b0),
-    .CNTVALUEIN(5'd0),
-    .CNTVALUEOUT(),
-    .LD(1'b0),
-    .LDPIPEEN(1'b0),
-    .REGRST(1'b0)
-);
+    IDELAYE2 #(
+        .IDELAY_VALUE(0),
+        .IDELAY_TYPE("FIXED")
+    )
+    phy_rx_ctl_idelay
+    (
+        .IDATAIN(phy_rx_ctl),
+        .DATAOUT(phy_rx_ctl_delay),
+        .DATAIN(1'b0),
+        .C(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CINVCTRL(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LD(1'b0),
+        .LDPIPEEN(1'b0),
+        .REGRST(1'b0)
+    );
+`elsif FPGA_EMUL
 
-`else // !`ifdef GENESYSII
+    IDELAYCTRL #(
+        .SIM_DEVICE("ULTRASCALE")
+    )
+    idelayctrl_inst
+    (
+        .REFCLK(clk_200_int),
+        .RST(rst_int),
+        .RDY()
+    );
+
+    generate
+        genvar k;
+        for(k = 0; k < 4; k++) begin
+            IDELAYE3 #(
+                .CASCADE("NONE"),
+                .DELAY_TYPE("FIXED"),
+                .REFCLK_FREQUENCY(200.0),
+                .SIM_DEVICE("ULTRASCALE_PLUS")
+            )
+            phy_rxd_idelay_k
+            (
+                .CASC_OUT(),
+                .CASC_IN(),
+                .CASC_RETURN(),
+                .IDATAIN(phy_rxd[k]),        
+                .DATAOUT(phy_rxd_delay[k]),
+                .DATAIN(1'b0),
+                .CLK(1'b0),
+                .CE(1'b0),
+                .INC(1'b0),
+                .CNTVALUEIN(5'd0),
+                .CNTVALUEOUT(),
+                .LOAD(1'b0),
+                .EN_VTC(1'b1),
+                .RST(1'b0)
+            );
+        end
+    endgenerate
+
+    /*
+    IDELAYE3 #(
+        .CASCADE("NONE"),
+        .DELAY_TYPE("FIXED"),
+        .REFCLK_FREQUENCY(200.0),
+        .SIM_DEVICE("ULTRASCALE_PLUS")
+    )
+    phy_rxd_idelay_0
+    (
+        .CASC_OUT(),
+        .CASC_IN(),
+        .CASC_RETURN(),
+        .IDATAIN(phy_rxd_ibuf[0]),        
+        .DATAOUT(phy_rxd_delay[0]),
+        .DATAIN(1'b0),
+        .CLK(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LOAD(1'b0),
+        .EN_VTC(1'b0),
+        .RST(1'b0)
+    );
+    
+    IDELAYE3 #(
+        .CASCADE("NONE"),
+        .DELAY_TYPE("FIXED"),
+        .REFCLK_FREQUENCY(200.0),
+        .SIM_DEVICE("ULTRASCALE_PLUS")
+    )
+    phy_rxd_idelay_1
+    (
+        .CASC_OUT(),
+        .CASC_IN(),
+        .CASC_RETURN(),
+        .IDATAIN(phy_rxd_ibuf[1]),        
+        .DATAOUT(phy_rxd_delay[1]),
+        .DATAIN(1'b0),
+        .CLK(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LOAD(1'b0),
+        .EN_VTC(1'b0),
+        .RST(1'b0)
+    );
+
+    IDELAYE3 #(
+        .CASCADE("NONE"),
+        .DELAY_TYPE("FIXED"),
+        .REFCLK_FREQUENCY(200.0),
+        .SIM_DEVICE("ULTRASCALE_PLUS")
+    )
+    phy_rxd_idelay_2
+    (
+        .CASC_OUT(),
+        .CASC_IN(),
+        .CASC_RETURN(),
+        .IDATAIN(phy_rxd_ibuf[2]),        
+        .DATAOUT(phy_rxd_delay[2]),
+        .DATAIN(1'b0),
+        .CLK(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LOAD(1'b0),
+        .EN_VTC(1'b0),
+        .RST(1'b0)
+    );
+    
+    IDELAYE3 #(
+        .CASCADE("NONE"),
+        .DELAY_TYPE("FIXED"),
+        .REFCLK_FREQUENCY(200.0),
+        .SIM_DEVICE("ULTRASCALE_PLUS")
+    )
+    phy_rxd_idelay_3
+    (
+        .CASC_OUT(),
+        .CASC_IN(),
+        .CASC_RETURN(),
+        .IDATAIN(phy_rxd_ibuf[3]),        
+        .DATAOUT(phy_rxd_delay[3]),
+        .DATAIN(1'b0),
+        .CLK(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LOAD(1'b0),
+        .EN_VTC(1'b0),
+        .RST(1'b0)
+    );
+    */
+
+    IDELAYE3 #(
+        .CASCADE("NONE"),
+        .DELAY_TYPE("FIXED"),
+        .REFCLK_FREQUENCY(200.0),
+        .DELAY_VALUE(0),
+        .SIM_DEVICE("ULTRASCALE_PLUS")
+    )
+    phy_rx_ctl_idelay
+    (
+        .CASC_OUT(),
+        .CASC_IN(),
+        .CASC_RETURN(),
+        .IDATAIN(phy_rx_ctl_ibuf),        
+        .DATAOUT(phy_rx_ctl_delay),
+        .DATAIN(1'b0),
+        .CLK(1'b0),
+        .CE(1'b0),
+        .INC(1'b0),
+        .CNTVALUEIN(5'd0),
+        .CNTVALUEOUT(),
+        .LOAD(1'b0),
+        .EN_VTC(1'b1),
+        .RST(1'b0)
+    );
+`else // !`ifdef GENESYSII || FPGA_EMUL
    assign phy_rx_ctl_delay = phy_rx_ctl;
    assign phy_rxd_delay = phy_rxd;
 `endif

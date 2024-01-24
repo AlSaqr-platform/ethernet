@@ -28,7 +28,7 @@ module dualmem_widen8(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dou
 `endif
 */
 
-`ifdef GENESYSII
+`ifdef FPGA_EMUL
  `define RAMB16
 `endif
 

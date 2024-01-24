@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 module rgmii_core #
 (
-`ifdef GENESYSII
+`ifdef FPGA_EMUL
  parameter TARGET = "XILINX"
 `else
  parameter TARGET = "GENERIC"
@@ -91,8 +91,8 @@ assign phy_reset_n = !rst;
 
 eth_mac_1g_rgmii_fifo #(
     .TARGET(TARGET),
-    .IODDR_STYLE("IODDR"),
-    .CLOCK_INPUT_STYLE("BUFR"),
+    .IODDR_STYLE("IODDR1"),
+    .CLOCK_INPUT_STYLE("IBUF"),
     .USE_CLK90("FALSE"), //TRUE 
     .ENABLE_PADDING(1),
     .MIN_FRAME_LENGTH(64),
