@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 based on fpga.v
- 
+
 */
 
 // Language: Verilog 2001
@@ -59,7 +59,7 @@ module rgmii_soc (
     input wire [7:0]   tx_axis_tdata,
     output wire        tx_axis_tready,
     input wire         tx_axis_tuser,
-   
+
        /*
         * AXI output
         */
@@ -202,6 +202,7 @@ wire       phy_rx_ctl_delay;
             IDELAYE3 #(
                 .CASCADE("NONE"),
                 .DELAY_TYPE("FIXED"),
+                .DELAY_FORMAT("COUNT"),
                 .REFCLK_FREQUENCY(200.0),
                 .SIM_DEVICE("ULTRASCALE_PLUS")
             )
@@ -210,7 +211,7 @@ wire       phy_rx_ctl_delay;
                 .CASC_OUT(),
                 .CASC_IN(),
                 .CASC_RETURN(),
-                .IDATAIN(phy_rxd[k]),        
+                .IDATAIN(phy_rxd[k]),
                 .DATAOUT(phy_rxd_delay[k]),
                 .DATAIN(1'b0),
                 .CLK(1'b0),
@@ -228,6 +229,7 @@ wire       phy_rx_ctl_delay;
     IDELAYE3 #(
         .CASCADE("NONE"),
         .DELAY_TYPE("FIXED"),
+        .DELAY_FORMAT("COUNT"),
         .REFCLK_FREQUENCY(200.0),
         .DELAY_VALUE(0),
         .SIM_DEVICE("ULTRASCALE_PLUS")
@@ -237,7 +239,7 @@ wire       phy_rx_ctl_delay;
         .CASC_OUT(),
         .CASC_IN(),
         .CASC_RETURN(),
-        .IDATAIN(phy_rx_ctl_ibuf),        
+        .IDATAIN(phy_rx_ctl),
         .DATAOUT(phy_rx_ctl_delay),
         .DATAIN(1'b0),
         .CLK(1'b0),
