@@ -112,7 +112,6 @@ module eth_mac_1g_rgmii_fifo #
 );
 
 wire tx_clk;
-wire rx_clk;
 wire tx_rst;
 wire rx_rst;
 
@@ -187,15 +186,15 @@ eth_mac_1g_rgmii_inst (
     .tx_rst(tx_rst),
     .rx_clk(rx_clk),
     .rx_rst(rx_rst),
-    .tx_axis_tdata(tx_fifo_axis_tdata),
-    .tx_axis_tvalid(tx_fifo_axis_tvalid),
-    .tx_axis_tready(tx_fifo_axis_tready),
-    .tx_axis_tlast(tx_fifo_axis_tlast),
-    .tx_axis_tuser(tx_fifo_axis_tuser),
-    .rx_axis_tdata(rx_fifo_axis_tdata),
-    .rx_axis_tvalid(rx_fifo_axis_tvalid),
-    .rx_axis_tlast(rx_fifo_axis_tlast),
-    .rx_axis_tuser(rx_fifo_axis_tuser),
+    .tx_axis_tdata(tx_axis_tdata),
+    .tx_axis_tvalid(tx_axis_tvalid),
+    .tx_axis_tready(tx_axis_tready),
+    .tx_axis_tlast(tx_axis_tlast),
+    .tx_axis_tuser(tx_axis_tuser),
+    .rx_axis_tdata(rx_axis_tdata),
+    .rx_axis_tvalid(rx_axis_tvalid),
+    .rx_axis_tlast(rx_axis_tlast),
+    .rx_axis_tuser(rx_axis_tuser),
     .rgmii_rx_clk(rgmii_rx_clk),
     .rgmii_rxd(rgmii_rxd),
     .rgmii_rx_ctl(rgmii_rx_ctl),
@@ -210,7 +209,7 @@ eth_mac_1g_rgmii_inst (
     .speed(speed_int),
     .ifg_delay(ifg_delay)
 );
-
+/*
 axis_async_fifo #(
     .ADDR_WIDTH(TX_FIFO_ADDR_WIDTH),
     .DATA_WIDTH(8),
@@ -304,5 +303,5 @@ rx_fifo (
     .m_status_bad_frame(rx_fifo_bad_frame),
     .m_status_good_frame(rx_fifo_good_frame)
 );
-
+*/
 endmodule

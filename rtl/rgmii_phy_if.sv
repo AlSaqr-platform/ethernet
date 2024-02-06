@@ -207,8 +207,7 @@ wire [3:0] phy_rgmii_txd_new;
 wire phy_rgmii_tx_ctl_new;
 
 oddr #(
-    //.TARGET(TARGET),
-    .TARGET("GENERIC"),
+    .TARGET(TARGET),
     .IODDR_STYLE(IODDR_STYLE),
     .WIDTH(1)
 )
@@ -221,8 +220,7 @@ clk_oddr_inst (
 );
 
 oddr #(
-    //.TARGET(TARGET),
-    .TARGET("GENERIC"),
+    .TARGET(TARGET),
     .IODDR_STYLE(IODDR_STYLE),
     .WIDTH(5)
 )

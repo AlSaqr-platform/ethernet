@@ -1,4 +1,3 @@
-
 // See LICENSE for license details.
 `ifdef FPGA_EMUL
  `default_nettype none
@@ -9,20 +8,20 @@
 
 module framing_top
   (
-  input wire 	      msoc_clk,
+  input wire          msoc_clk,
   input wire [14:0]   core_lsu_addr,
   input wire [63:0]   core_lsu_wdata,
   input wire [7:0]    core_lsu_be,
-  input wire 	      ce_d,
-  input wire 	      we_d,
-  input wire 	      framing_sel,
+  input wire          ce_d,
+  input wire          we_d,
+  input wire          framing_sel,
   output logic [63:0] framing_rdata,
 
     // Internal 125 MHz clock
-  input wire 	      clk_int,
-  input wire 	      rst_int,
-  input wire 	      clk90_int,
-  input wire 	      clk_200_int,
+  input wire          clk_int,
+  input wire          rst_int,
+  input wire          clk90_int,
+  input wire          clk_200_int,
 
     /*
      * Ethernet: 1000BASE-T RGMII
@@ -37,12 +36,12 @@ module framing_top
   input wire 	      phy_int_n,
   input wire 	      phy_pme_n,
 
-  input wire 	      phy_mdio_i,
-  output reg 	      phy_mdio_o,
-  output reg 	      phy_mdio_oe,
-  output wire 	      phy_mdc,
+  input  wire         phy_mdio_i,
+  output reg          phy_mdio_o,
+  output reg          phy_mdio_oe,
+  output wire         phy_mdc,
 
-  output reg 	      eth_irq
+  output reg		eth_irq
    );
 
 // obsolete signals to be removedphy_
@@ -109,7 +108,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
         else if ((last > 0) && (last < 7))
           begin
             byte_sync <= 1'b0;
-            last      <= last + 3'b1;
+            last <= last + 3'b1;
           end
         else
           begin
@@ -273,32 +272,29 @@ always_ff @(posedge clk_int or posedge rst_int)
      if (rst_int)
        begin
           tx_axis_tvalid <= 'b0;
-	        tx_axis_tvalid_dly <= 'b0;
-	        tx_frame_addr <= 'b0;
-	        tx_axis_tlast <= 'b0;
+	  tx_axis_tvalid_dly <= 'b0;
+	  tx_frame_addr <= 'b0;
+	  tx_axis_tlast <= 'b0;
           tx_enable_old <= 'b0;
        end
      else
        begin
           tx_enable_old <= tx_enable_i;
-	        if (tx_enable_i & (tx_enable_old == 0))
-	          begin
-	             tx_frame_addr <= 'b0;
-	          end
-	        else // davide added else statement...
-	          begin
-	             if (tx_axis_tready & tx_axis_tvalid)
-		             begin
-		                tx_frame_addr <= tx_frame_addr + 1;
-		                tx_axis_tlast <= (tx_frame_addr == tx_packet_length-2) & tx_axis_tvalid_dly;
-		             end
-	          end
+	  if (tx_enable_i & (tx_enable_old == 0))
+	    begin
+	       tx_frame_addr <= 'b0;
+	    end
+	  if (tx_axis_tready)
+            begin
+	      tx_frame_addr <= tx_frame_addr + 1;
+              tx_axis_tlast <= (tx_frame_addr == tx_packet_length-2) & tx_axis_tvalid_dly;
+	    end
           tx_axis_tvalid <= tx_axis_tvalid_dly;
-	        if (tx_enable_old)
-	          tx_axis_tvalid_dly <= 1'b1;
-	        else if (~tx_axis_tlast)
-	          tx_axis_tvalid_dly <= 1'b0;
-       end
+	  if (tx_enable_old)
+	      tx_axis_tvalid_dly <= 1'b1;
+	  else if (~tx_axis_tlast)
+	      tx_axis_tvalid_dly <= 1'b0;
+      end
 
    always_ff @(posedge rx_clk or posedge rst_int)
      if (rst_int)

@@ -94,14 +94,9 @@ assign phy_reset_n = !rst;
 
 eth_mac_1g_rgmii_fifo #(
     .TARGET(TARGET),
-`ifdef GENESYSII
     .IODDR_STYLE("IODDR"),
     .CLOCK_INPUT_STYLE("BUFR"),
-`elsif FPGA_EMUL
-    .IODDR_STYLE("IODDR1"),
-    .CLOCK_INPUT_STYLE("IBUF"),
-`endif
-    .USE_CLK90("FALSE"), //TRUE
+    .USE_CLK90("TRUE"),
     .ENABLE_PADDING(1),
     .MIN_FRAME_LENGTH(64),
     .TX_FIFO_ADDR_WIDTH(12),
