@@ -25,6 +25,10 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
  `define RAMB16
 `endif
 
+`ifdef GENESYSII
+ `define RAMB16
+`endif
+
 `ifdef RAMB16
    //FPGA XILINX MEM
    generate for (r = 0; r < 2; r=r+1)

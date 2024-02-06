@@ -3,6 +3,9 @@
 `ifdef FPGA_EMUL
  `default_nettype none
 `endif
+`ifdef GENESYSII
+ `default_nettype none
+`endif
 
 module framing_top
   (
@@ -77,6 +80,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
        /*
         * AXI output
         */
+       wire       rx_clk;
        wire [7:0] rx_axis_tdata;
        wire       rx_axis_tvalid;
        wire       rx_axis_tlast;
@@ -87,7 +91,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
         */
          wire [31:0] tx_fcs_reg_rev, rx_fcs_reg_rev;
 
-  always_ff @(posedge clk_int or posedge rst_int) begin
+  always_ff @(posedge rx_clk or posedge rst_int) begin
     if (rst_int == 1'b1)
       begin
         byte_sync <= 1'b0;
@@ -121,7 +125,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
    assign phy_mdc = phy_mdclk;
 
    dualmem_widen8 RAMB16_inst_rx (
-                                    .clka(clk_int),                // Port A Clock
+                                    .clka(rx_clk),                // Port A Clock
                                     .clkb(msoc_clk),              // Port A Clock
                                     .douta(),                     // Port A 8-bit Data Output
                                     .addra({nextbuf[2:0],rx_addr_axis[10:3],rx_addr_axis[1:0]}),    // Port A 11-bit Address Input
@@ -296,7 +300,7 @@ always_ff @(posedge clk_int or posedge rst_int)
 	          tx_axis_tvalid_dly <= 1'b0;
        end
 
-   always_ff @(posedge clk_int or posedge rst_int)
+   always_ff @(posedge rx_clk or posedge rst_int)
      if (rst_int)
        begin
           rx_addr_axis <= 'b0;
@@ -323,6 +327,7 @@ rgmii_soc rgmii_soc1
    .clk_int(clk_int),
    .clk90_int(clk90_int),
    .clk_200_int(clk_200_int),
+   .rx_clk(rx_clk),
    /*
     * Ethernet: 1000BASE-T RGMII
     */
@@ -399,5 +404,8 @@ xlnx_ila_3 eth_ila_clk_msoc (
 endmodule // framing_top
 
 `ifdef FPGA_EMUL
+ `default_nettype wire
+`endif
+`ifdef GENESYSII
  `default_nettype wire
 `endif

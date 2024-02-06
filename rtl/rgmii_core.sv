@@ -32,6 +32,8 @@ module rgmii_core #
 (
 `ifdef FPGA_EMUL
  parameter TARGET = "XILINX"
+`elsif GENESYSII
+ parameter TARGET = "XILINX"
 `else
  parameter TARGET = "GENERIC"
 `endif
@@ -62,17 +64,18 @@ module rgmii_core #
        /*
         * AXI input
         */
- 
+
     input wire         tx_axis_tvalid,
     input wire         tx_axis_tlast,
     input wire [7:0]   tx_axis_tdata,
     output wire        tx_axis_tready,
     input wire         tx_axis_tuser,
-   
+
        /*
         * AXI output
         */
- 
+
+    output wire        rx_clk,
     output wire [7:0]  rx_axis_tdata,
     output wire        rx_axis_tvalid,
     output wire        rx_axis_tlast,
@@ -91,9 +94,14 @@ assign phy_reset_n = !rst;
 
 eth_mac_1g_rgmii_fifo #(
     .TARGET(TARGET),
+`ifdef GENESYSII
+    .IODDR_STYLE("IODDR"),
+    .CLOCK_INPUT_STYLE("BUFR"),
+`elsif FPGA_EMUL
     .IODDR_STYLE("IODDR1"),
     .CLOCK_INPUT_STYLE("IBUF"),
-    .USE_CLK90("FALSE"), //TRUE 
+`endif
+    .USE_CLK90("FALSE"), //TRUE
     .ENABLE_PADDING(1),
     .MIN_FRAME_LENGTH(64),
     .TX_FIFO_ADDR_WIDTH(12),
@@ -107,6 +115,7 @@ eth_mac_inst (
     .gtx_rst(rst),
     .logic_clk(clk),
     .logic_rst(rst),
+    .rx_clk(rx_clk),
 
     .tx_axis_tdata(tx_axis_tdata),
     .tx_axis_tvalid(tx_axis_tvalid),

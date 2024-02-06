@@ -63,6 +63,7 @@ module rgmii_soc (
        /*
         * AXI output
         */
+    output wire        rx_clk,
     output wire [7:0]  rx_axis_tdata,
     output wire        rx_axis_tvalid,
     output wire        rx_axis_tlast,
@@ -264,6 +265,7 @@ core_inst (
      */
     .clk(clk_int),
     .clk90(clk90_int),
+    .rx_clk(rx_clk),
     .rst(rst_int),
     /*
      * Ethernet: 1000BASE-T RGMII

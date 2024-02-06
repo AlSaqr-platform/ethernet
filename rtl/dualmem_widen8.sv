@@ -32,6 +32,9 @@ module dualmem_widen8(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dou
  `define RAMB16
 `endif
 
+`ifdef GENESYSII
+ `define RAMB16
+`endif
 
    assign douta = dout0 >> {addra_dly[12:11],4'b0000};
    assign doutb = dout1 >> {addrb_dly[10:9],6'b000000};

@@ -72,6 +72,7 @@ module eth_mac_1g_rgmii_fifo #
     /*
      * AXI output
      */
+    output wire        rx_clk,
     output wire [7:0]  rx_axis_tdata,
     output wire        rx_axis_tvalid,
     input  wire        rx_axis_tready,
@@ -303,5 +304,5 @@ rx_fifo (
     .m_status_bad_frame(rx_fifo_bad_frame),
     .m_status_good_frame(rx_fifo_good_frame)
 );
-   
+
 endmodule
