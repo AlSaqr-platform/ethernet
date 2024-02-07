@@ -17,7 +17,7 @@
 BENDER ?= bender
 QUESTA ?= questa-2022.3
 TBENCH ?= eth_idma_tb
-DUT    ?= eth_idma
+DUT    ?= eth_idma_wrap
 
 # Design and simulation variables
 ETH_ROOT      ?= $(shell $(BENDER) path fe-ethernet)
@@ -49,10 +49,10 @@ eth-nonfree-init:
 
 ##############
 # Simulation #
-##############
+##############                            
 
 $(ETH_ROOT)/target/sim/vsim/compile.eth.tcl: Bender.yml
-	$(BENDER) script vsim -t eth_test \
+	$(BENDER) script vsim -t test -t rtl \
 	--vlog-arg="-svinputport=compat" \
 	--vlog-arg="-override_timescale 1ns/1ps" \
 	--vlog-arg="-suppress 2583" > $@
