@@ -32,7 +32,7 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
      RAMB16_S9_S36_inst
        (
         .CLKA   ( clka                     ),     // Port A Clock
-        .DOA    ( douta[r*8 +: 8]          ),     // Port A 8-bit Data Output
+        .DOA    ( douta[r*8 +: 8]          ),     // Port A 1-bit Data Output
         .DOPA   (                          ),
         .ADDRA  ( addra                    ),     // Port A 14-bit Address Input
         .DIA    ( dina[r*8 +: 8]           ),     // Port A 1-bit Data Input
@@ -54,34 +54,23 @@ module dualmem_widen(clka, clkb, dina, dinb, addra, addrb, wea, web, douta, dout
 
 `else // !`ifdef RAMB16
 
-   generate for (r = 0; r < 2; r=r+1)
-     
-     asym_ram_tdp_read_first
-       #(
-	 .WIDTHA(8),
-	 .SIZEA(2048),
-	 .ADDRWIDTHA(11),
-	 .WIDTHB(32),
-	 .SIZEB(512),
-	 .ADDRWIDTHB(9)
-	 )
-     asym_ram_tdp_read_first_inst
-       (
-        .clkA   ( clka                     ),     // Port A Clock
-        .doA    ( douta[r*8 +: 8]          ),     // Port A 8-bit Data Output
-        .addrA  ( addra                    ),     // Port A 11-bit Address Input
-        .diA    ( dina[r*8 +: 8]           ),     // Port A 8-bit Data Input
-        .enaA   ( ena                      ),     // Port A RAM Enable Input
-        .weA    ( wea[r]                   ),     // Port A Write Enable Input
-        .clkB   ( clkb                     ),     // Port B Clock
-        .doB    ( doutb[r*32 +: 32]        ),     // Port B 32-bit Data Output
-        .addrB  ( addrb                    ),     // Port B 9-bit Address Input
-        .diB    ( dinb[r*32 +: 32]         ),     // Port B 32-bit Data Input
-        .enaB   ( enb                      ),     // Port B RAM Enable Input
-        .weB    ( web[r]                   )      // Port B Write Enable Input
-        );
-      
-   endgenerate
+// This bit is a placeholder
+
+infer_dpram #(.RAM_SIZE(11), .BYTE_WIDTH(8)) ram1 // RAM_SIZE is in words
+(
+.ram_clk_a(clka),
+.ram_en_a(|ena),
+.ram_we_a({wea[1],wea[1],wea[1],wea[1],wea[0],wea[0],wea[0],wea[0]}),
+.ram_addr_a(addra),
+.ram_wrdata_a({dina,dina,dina,dina}),
+.ram_rddata_a({dout,douta}),
+.ram_clk_b(clkb),
+.ram_en_b(|enb),
+.ram_we_b({web[1],web[1],web[1],web[1],web[0],web[0],web[0],web[0]}),
+.ram_addr_b({2'b0,addrb}),
+.ram_wrdata_b(dinb),
+.ram_rddata_b(doutb)
+ );
    
 `endif
    

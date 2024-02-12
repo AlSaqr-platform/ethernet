@@ -1,45 +1,42 @@
-
 // See LICENSE for license details.
-`ifdef GENESYSII
- `default_nettype none
-`endif
+`default_nettype none
 
 module framing_top
   (
-  input wire 	      msoc_clk,
+  input wire          msoc_clk,
   input wire [14:0]   core_lsu_addr,
   input wire [63:0]   core_lsu_wdata,
   input wire [7:0]    core_lsu_be,
-  input wire 	      ce_d,
-  input wire 	      we_d,
-  input wire 	      framing_sel,
+  input wire          ce_d,
+  input wire          we_d,
+  input wire          framing_sel,
   output logic [63:0] framing_rdata,
 
     // Internal 125 MHz clock
-  input wire 	      clk_int,
-  input wire 	      rst_int,
-  input wire 	      clk90_int,
-  input wire 	      clk_200_int,
- 
+  input wire          clk_int,
+  input wire          rst_int,
+  input wire          clk90_int,
+  input wire          clk_200_int,
+
     /*
      * Ethernet: 1000BASE-T RGMII
      */
-  input wire 	      phy_rx_clk,
+  input wire          phy_rx_clk,
   input wire [3:0]    phy_rxd,
-  input wire 	      phy_rx_ctl,
-  output wire 	      phy_tx_clk,
+  input wire          phy_rx_ctl,
+  output wire         phy_tx_clk,
   output wire [3:0]   phy_txd,
-  output wire 	      phy_tx_ctl,
-  output wire 	      phy_reset_n,
-  input wire 	      phy_int_n,
-  input wire 	      phy_pme_n,
+  output wire         phy_tx_ctl,
+  output wire         phy_reset_n,
+  input wire          phy_int_n,
+  input wire          phy_pme_n,
    
-  input wire 	      phy_mdio_i,
-  output reg 	      phy_mdio_o,
-  output reg 	      phy_mdio_oe,
-  output wire 	      phy_mdc,
+  input wire          phy_mdio_i,
+  output reg          phy_mdio_o,
+  output reg          phy_mdio_oe,
+  output wire         phy_mdc,
 
-  output reg 	      eth_irq
+  output reg          eth_irq
    );
 
 // obsolete signals to be removedphy_
@@ -77,6 +74,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
        /*
         * AXI output
         */
+       wire       rx_clk;
        wire [7:0] rx_axis_tdata;
        wire       rx_axis_tvalid;
        wire       rx_axis_tlast;
@@ -87,7 +85,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
         */
          wire [31:0] tx_fcs_reg_rev, rx_fcs_reg_rev;
    
-   always @(posedge clk_int)
+   always @(posedge rx_clk)
      if (rst_int == 1'b1)
        begin
 	  byte_sync <= 1'b0;
@@ -119,7 +117,7 @@ reg        byte_sync, sync, irq_en, tx_busy;
    assign phy_mdc = phy_mdclk;
    
    dualmem_widen8 RAMB16_inst_rx (
-                                    .clka(clk_int),                // Port A Clock
+                                    .clka(rx_clk),                // Port A Clock
                                     .clkb(msoc_clk),              // Port A Clock
                                     .douta(),                     // Port A 8-bit Data Output
                                     .addra({nextbuf[2:0],rx_addr_axis[10:3],rx_addr_axis[1:0]}),    // Port A 11-bit Address Input
@@ -290,7 +288,7 @@ always @(posedge clk_int)
 	      tx_axis_tvalid_dly <= 1'b0;
       end
  
-   always @(posedge clk_int)
+   always @(posedge rx_clk)
      if (rst_int)
        begin
           rx_addr_axis <= 'b0;
@@ -317,6 +315,7 @@ rgmii_soc rgmii_soc1
    .clk_int(clk_int),
    .clk90_int(clk90_int),
    .clk_200_int(clk_200_int),
+   .rx_clk(rx_clk),
    /*
     * Ethernet: 1000BASE-T RGMII
     */
@@ -391,7 +390,4 @@ xlnx_ila_3 eth_ila_clk_msoc (
 `endif
    
 endmodule // framing_top
-
-`ifdef GENESYSII
- `default_nettype none
-`endif
+`default_nettype wire

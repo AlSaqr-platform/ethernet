@@ -27,8 +27,8 @@ THE SOFTWARE.
 /*
  * Generic source synchronous DDR input
  */
-module ssio_ddr_in 
-#(
+module ssio_ddr_in #
+(
     // target ("SIM", "GENERIC", "XILINX", "ALTERA")
     parameter TARGET = "GENERIC",
     // IODDR style ("IODDR", "IODDR2")
