@@ -44,10 +44,10 @@ packages:
       Git: https://github.com/pulp-platform/common_verification.git
     dependencies: []
   idma:
-    revision: 83fba99b5ddab970777d7bcc3017973194831f3b
+    revision: null
     version: null
     source:
-      Git: git@github.com:pulp-platform/iDMA.git
+      Path: /scratch/lvalente/ethernet/working_dir/idma
     dependencies:
     - axi
     - common_cells
@@ -59,7 +59,10 @@ packages:
     version: null
     source:
       Path: .bender/git/checkouts/idma-9c2c563d827a2a73/target/rtl
-    dependencies: []
+    dependencies:
+    - axi
+    - common_cells
+    - register_interface
   register_interface:
     revision: d7693be4aef1fc7e7eb2b00b41c42e87d959866c
     version: 0.4.2
