@@ -50,7 +50,11 @@ eth-nonfree-init:
 
 -include $(ETH_ROOT)/nonfree/nonfree.mk
 
-back-idma:
+##############
+# HW GEN     #
+##############  
+
+eth-gen:
 	make -C $(DMA_ROOT) idma_hw_all IDMA_BACKEND_IDS=$(IDMA_BACKEND_IDS)
 
 ##############
