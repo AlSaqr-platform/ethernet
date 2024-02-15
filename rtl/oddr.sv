@@ -127,7 +127,6 @@ end else if (TARGET == "ALTERA") begin
         .dataout(q)
     );
 end else begin
-/*
     for (n = 0; n < WIDTH; n = n + 1) begin : oddr
         logic q1, q2;
 
@@ -148,7 +147,6 @@ end else begin
             end
         end
     end  // oddr
-*/
 end
 
 endgenerate
