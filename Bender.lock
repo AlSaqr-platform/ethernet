@@ -23,8 +23,8 @@ packages:
     dependencies:
     - axi
   axi_stream:
-    revision: 472751f550e3918215603e21734fe0ece3c66f79
-    version: null
+    revision: 54891ff40455ca94a37641b9da4604647878cc07
+    version: 0.1.1
     source:
       Git: git@github.com:pulp-platform/axi_stream.git
     dependencies:
@@ -44,8 +44,8 @@ packages:
       Git: https://github.com/pulp-platform/common_verification.git
     dependencies: []
   idma:
-    revision: 7072a3f85c47fccef8e23a0dfe69cd64337a415f
-    version: null
+    revision: a80fcace92b1562e7cd76c8615298b5623ba74d2
+    version: 0.6.0-beta
     source:
       Git: git@github.com:pulp-platform/iDMA.git
     dependencies:

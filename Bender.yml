@@ -14,8 +14,8 @@ dependencies:
   common_verification : { git: "https://github.com/pulp-platform/common_verification.git", version: 0.2.0 }
   register_interface : { git: "https://github.com/pulp-platform/register_interface.git", version: 0.4.2 }
   common_cells: { git: "https://github.com/pulp-platform/common_cells.git", version: 1.21.0 }
-  axi_stream: { git: "git@github.com:pulp-platform/axi_stream.git", rev: "472751f550e3918215603e21734fe0ece3c66f79" }
-  idma: { git: "git@github.com:pulp-platform/iDMA.git", rev: "7072a3f85c47fccef8e23a0dfe69cd64337a415f" } 
+  axi_stream: { git: "git@github.com:pulp-platform/axi_stream.git", rev: "54891ff40455ca94a37641b9da4604647878cc07" }
+  idma: { git: "git@github.com:pulp-platform/iDMA.git", rev: "v0.6.0-beta" } 
   
 
 export_include_dirs:
@@ -30,8 +30,6 @@ sources:
   - gen/eth_idma_reg_top.sv
   - rtl/axis_gmii_rx.sv
   - rtl/axis_gmii_tx.sv
-  - rtl/fll_dummy.sv
-  - rtl/clk_gen_hyper.sv
    # Level 1
   - rtl/eth_mac_1g_rgmii_fifo.sv
   - rtl/eth_mac_1g_rgmii.sv
@@ -45,9 +43,7 @@ sources:
   - rtl/ssio_ddr_in.sv
    # Level 2
   - rtl/framing_top.sv
-  - rtl/eth_idma_pkg.sv
   - rtl/eth_top.sv
-  - rtl/eth_clk_gen.sv
   - rtl/eth_idma_wrap.sv
 
   - target: test
