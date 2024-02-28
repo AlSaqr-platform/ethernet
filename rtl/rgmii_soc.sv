@@ -35,7 +35,7 @@ module rgmii_soc (
     input              clk_int,
     input              rst_int,
     input              clk90_int,
-    input              clk_200_int,
+    input              clk_iodelay_int,
 
     /*
      * Ethernet: 1000BASE-T RGMII
@@ -85,7 +85,7 @@ wire       phy_rx_ctl_delay;
 `ifdef GENESYSII
     IDELAYCTRL idelayctrl_inst
     (
-        .REFCLK(clk_200_int),
+        .REFCLK(clk_iodelay_int),
         .RST(rst_int),
         .RDY()
     );
@@ -192,7 +192,7 @@ wire       phy_rx_ctl_delay;
     )
     idelayctrl_inst
     (
-        .REFCLK(clk_200_int),
+        .REFCLK(clk_iodelay_int),
         .RST(rst_int),
         .RDY()
     );
@@ -204,7 +204,7 @@ wire       phy_rx_ctl_delay;
                 .CASCADE("NONE"),
                 .DELAY_TYPE("FIXED"),
                 .DELAY_FORMAT("COUNT"),
-                .REFCLK_FREQUENCY(200.0),
+                .REFCLK_FREQUENCY(300.0),
                 .SIM_DEVICE("ULTRASCALE_PLUS")
             )
             phy_rxd_idelay_k

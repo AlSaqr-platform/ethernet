@@ -7,7 +7,7 @@ module eth_rgmii
     )
    (
     input logic       clk_i, // Clock
-    input logic       clk_200MHz_i,
+    input logic       clk_iodelay_i,
     input logic       rst_ni, // Asynchronous reset active low
     
     input  logic      eth_clk_i,
@@ -66,7 +66,7 @@ module eth_rgmii
    .rst_int(!rst_ni),
    .clk_int(phy_tx_clk_i), // 125 MHz in-phase
    .clk90_int(eth_clk_i),    // 125 MHz quadrature
-   .clk_200_int(clk_200MHz_i),
+   .clk_iodelay_int(clk_iodelay_i),
    /*
     * Ethernet: 1000BASE-T RGMII
     */

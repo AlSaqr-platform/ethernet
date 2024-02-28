@@ -21,7 +21,7 @@ module framing_top
   input wire          clk_int,
   input wire          rst_int,
   input wire          clk90_int,
-  input wire          clk_200_int,
+  input wire          clk_iodelay_int,
 
     /*
      * Ethernet: 1000BASE-T RGMII
@@ -322,7 +322,7 @@ rgmii_soc rgmii_soc1
    .rst_int(rst_int),
    .clk_int(clk_int),
    .clk90_int(clk90_int),
-   .clk_200_int(clk_200_int),
+   .clk_iodelay_int(clk_iodelay_int),
    .rx_clk(rx_clk),
    /*
     * Ethernet: 1000BASE-T RGMII
