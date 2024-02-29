@@ -17,14 +17,22 @@ module eth_rgmii
     output wire       eth_txctl,
     output wire [3:0] eth_txd,
     output wire       eth_rst_n,
-    output reg        eth_irq 
+
+    input wire        phy_int_i,
+    input wire        phy_pme_i,
+    input  wire       phy_mdio_i,
+    output reg        phy_mdio_o,
+    output reg        phy_mdio_eo,
+    output wire       phy_mdc_o,
+    output reg        eth_irq
+
     );
     
     logic      clk_200MHz;
     logic      phy_tx_clk;
     logic      eth_clk;
      
-    logic 		      eth_en, eth_we, eth_int_n, eth_pme_n, eth_mdio_i, eth_mdio_o, eth_mdio_oe;
+    logic 		      eth_en, eth_we;
     logic [AXI_ADDR_WIDTH-1:0]   eth_addr;
     logic [AXI_DATA_WIDTH-1:0]   eth_wrdata, eth_rdata;
     logic [AXI_DATA_WIDTH/8-1:0] eth_be;
@@ -84,13 +92,13 @@ module eth_rgmii
    
    .phy_reset_n(eth_rst_n),
    
-   .phy_int_n(eth_int_n), // NOT DRIVEN
-   .phy_pme_n(eth_pme_n), // NOT DRIVEN
+   .phy_int_n(phy_int_i), // NOT DRIVEN
+   .phy_pme_n(phy_pme_i), // NOT DRIVEN
    
-   .phy_mdc(eth_mdc),         // MDIO
-   .phy_mdio_i('0),           // MDIO
-   .phy_mdio_o(eth_mdio_o),   // MDIO
-   .phy_mdio_oe(eth_mdio_oe), // MDIO
+   .phy_mdc(phy_mdc_o),         // MDIO
+   .phy_mdio_i(phy_mdio_i),           // MDIO
+   .phy_mdio_o(phy_mdio_o),   // MDIO
+   .phy_mdio_oe(phy_mdio_eo), // MDIO
    
    .eth_irq(eth_irq)
    );
