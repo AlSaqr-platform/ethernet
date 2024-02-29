@@ -7,12 +7,8 @@ module eth_rgmii
     )
    (
     input logic       clk_i, // Clock
-    input logic       clk_200MHz_i,
     input logic       rst_ni, // Asynchronous reset active low
-    
-    input  logic      eth_clk_i,
     AXI_BUS.Slave     ethernet,
-    
     // Ethernet
     input wire 	      eth_rxck,
     input wire 	      eth_rxctl,
@@ -20,19 +16,28 @@ module eth_rgmii
     output wire       eth_txck,
     output wire       eth_txctl,
     output wire [3:0] eth_txd,
-    output wire       eth_rst_n ,
-    input logic       phy_tx_clk_i,
-
+    output wire       eth_rst_n,
     output reg        eth_irq 
-    
     );
     
-   logic 		      eth_en, eth_we, eth_int_n, eth_pme_n, eth_mdio_i, eth_mdio_o, eth_mdio_oe;
-   logic [AXI_ADDR_WIDTH-1:0]   eth_addr;
-   logic [AXI_DATA_WIDTH-1:0]   eth_wrdata, eth_rdata;
-   logic [AXI_DATA_WIDTH/8-1:0] eth_be;
+    logic      clk_200MHz;
+    logic      phy_tx_clk;
+    logic      eth_clk;
+     
+    logic 		      eth_en, eth_we, eth_int_n, eth_pme_n, eth_mdio_i, eth_mdio_o, eth_mdio_oe;
+    logic [AXI_ADDR_WIDTH-1:0]   eth_addr;
+    logic [AXI_DATA_WIDTH-1:0]   eth_wrdata, eth_rdata;
+    logic [AXI_DATA_WIDTH/8-1:0] eth_be;
    
-   axi2mem 
+   eth_clk_gen i_eth_clk_gen(
+      .ref_clk_i(clk_i),
+      .rst_ni(rst_ni),
+      .clk_eth_125_o(phy_tx_clk),
+      .clk_eth_125_90_o(eth_clk),
+      .clk_eth_200_o(clk_200MHz)
+    );
+   
+  axi2mem 
      #(
        .AXI_ID_WIDTH   ( AXI_ID_WIDTH     ),
        .AXI_ADDR_WIDTH ( AXI_ADDR_WIDTH   ),
@@ -41,16 +46,16 @@ module eth_rgmii
        ) 
    i_axi2rom 
        (
-	.clk_i  ( clk_i                   ),
-	.rst_ni ( rst_ni                  ),
-	.slave  ( ethernet                ),
-	.req_o  ( eth_en                  ),
-	.we_o   ( eth_we                  ),
-	.addr_o ( eth_addr                ),
-	.be_o   ( eth_be                  ),
-	.data_o ( eth_wrdata              ),
-	.data_i ( eth_rdata               )
-	);
+  .clk_i  ( clk_i                   ),
+  .rst_ni ( rst_ni                  ),
+  .slave  ( ethernet                ),
+  .req_o  ( eth_en                  ),
+  .we_o   ( eth_we                  ),
+  .addr_o ( eth_addr                ),
+  .be_o   ( eth_be                  ),
+  .data_o ( eth_wrdata              ),
+  .data_i ( eth_rdata               )
+  );
    
    framing_top 
      eth_rgmii
@@ -64,9 +69,9 @@ module eth_rgmii
    .framing_sel(eth_en),
    .framing_rdata(eth_rdata),
    .rst_int(!rst_ni),
-   .clk_int(phy_tx_clk_i), // 125 MHz in-phase
-   .clk90_int(eth_clk_i),    // 125 MHz quadrature
-   .clk_200_int(clk_200MHz_i),
+   .clk_int(phy_tx_clk), // 125 MHz in-phase
+   .clk90_int(eth_clk),    // 125 MHz quadrature
+   .clk_200_int(clk_200MHz),
    /*
     * Ethernet: 1000BASE-T RGMII
     */
@@ -90,6 +95,7 @@ module eth_rgmii
    .eth_irq(eth_irq)
    );
    
+
 
 //   IOBUF
 //     #(

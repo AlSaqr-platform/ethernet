@@ -11,8 +11,6 @@ module eth_tb;
    parameter UW = 8;   //User width
 
    localparam tCK    = 1ns;
-   localparam tCK200 = 5ns;
-   localparam tCK125 = 8ns;
 
    logic s_clk           = 0;
    logic s_clk_200MHz    = 0;
@@ -71,22 +69,15 @@ module eth_tb;
    i_eth_rgmii_tx
      (
       .clk_i           ( s_clk             ),
-      .clk_200MHz_i    ( s_clk_200MHz      ),
       .rst_ni          ( s_rst_n           ),
-      .eth_clk_i       ( s_clk_125MHz_90   ), //90
-
       .ethernet        ( axi_master_tx     ),
-
       .eth_rxck        ( eth_rxck          ),
       .eth_rxctl       ( eth_rxctl         ),
       .eth_rxd         ( eth_rxd           ),
-
       .eth_txck        ( eth_txck          ),
       .eth_txctl       ( eth_txctl         ),
       .eth_txd         ( eth_txd           ),
-
-      .eth_rst_n       ( eth_tx_rst_n      ),
-      .phy_tx_clk_i    ( s_clk_125MHz_0    ) //0
+      .eth_rst_n       ( eth_tx_rst_n      )
       );
 
    // RX ETH_RGMII
@@ -100,22 +91,15 @@ module eth_tb;
    i_eth_rgmii_rx
      (
       .clk_i           ( s_clk             ),
-      .clk_200MHz_i    ( s_clk_200MHz      ),
       .rst_ni          ( s_rst_n           ),
-
-      .eth_clk_i       ( s_clk_125MHz_90   ), // 90
       .ethernet        ( axi_master_rx     ),
-
       .eth_rxck        ( eth_txck          ),
       .eth_rxctl       ( eth_txctl         ),
       .eth_rxd         ( eth_txd           ),
-
       .eth_txck        ( eth_rxck          ),
       .eth_txctl       ( eth_rxctl         ),
       .eth_txd         ( eth_rxd           ),
-
-      .eth_rst_n       ( eth_rx_rst_n      ),
-      .phy_tx_clk_i    ( s_clk_125MHz_0    ) //0
+      .eth_rst_n       ( eth_rx_rst_n      )
       );
 
    // high level functions for axi operations
@@ -179,32 +163,32 @@ module eth_tb;
       end
    end
 
-   initial begin
-      while (!done) begin
-	       s_clk_200MHz <= 1;
-	       #(tCK200/2);
-	       s_clk_200MHz <= 0;
-	       #(tCK200/2);
-      end
-   end
+   // initial begin
+   //    while (!done) begin
+	  //      s_clk_200MHz <= 1;
+	  //      #(tCK200/2);
+	  //      s_clk_200MHz <= 0;
+	  //      #(tCK200/2);
+   //    end
+   // end
 
-   initial begin
-      while (!done) begin
-	       s_clk_125MHz_0 <= 1;
-	       #(tCK125/2);
-	       s_clk_125MHz_0 <= 0;
-	       #(tCK125/2);
-      end
-   end
+   // initial begin
+   //    while (!done) begin
+	  //      s_clk_125MHz_0 <= 1;
+	  //      #(tCK125/2);
+	  //      s_clk_125MHz_0 <= 0;
+	  //      #(tCK125/2);
+   //    end
+   // end
 
-   initial begin
-      while (!done) begin
-	       s_clk_125MHz_90 <= 0;
-	       #(tCK125/2);
-	       s_clk_125MHz_90 <= 1;
-	         #(tCK125/2);
-      end
-   end
+   // initial begin
+   //    while (!done) begin
+	  //      s_clk_125MHz_90 <= 0;
+	  //      #(tCK125/2);
+	  //      s_clk_125MHz_90 <= 1;
+	  //        #(tCK125/2);
+   //    end
+   // end
 
 
    // ------------------------ BEGINNING OF SIMULATION ------------------------

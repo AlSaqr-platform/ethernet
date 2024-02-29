@@ -8,6 +8,7 @@ dependencies:
   axi_mem_if : { git: "git@github.com:pulp-platform/axi_mem_if.git" , version: 0.2.1 }
   axi : { git: "git@github.com:pulp-platform/axi.git", version: 0.36.0 }
   common_verification : { git: "https://github.com/pulp-platform/common_verification.git", version: 0.2.0 }
+  common_cells:         { git: "https://github.com/pulp-platform/common_cells.git",           version: 1.32.0 }
 
 export_include_dirs:
   - include/
@@ -37,6 +38,8 @@ sources:
   - rtl/rgmii_phy_if.sv
   - rtl/rgmii_soc.sv
   - rtl/ssio_ddr_in.sv
+  - rtl/clk_gen_hyper.sv
+  - rtl/eth_clk_gen.sv
 
   - target : gf22_macro
     defines:
