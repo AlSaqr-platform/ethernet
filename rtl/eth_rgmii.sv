@@ -10,8 +10,8 @@ module eth_rgmii
     input logic       rst_ni, // Asynchronous reset active low
     AXI_BUS.Slave     ethernet,
     // Ethernet
-    input wire 	      eth_rxck,
-    input wire 	      eth_rxctl,
+    input wire        eth_rxck,
+    input wire        eth_rxctl,
     input wire [3:0]  eth_rxd,
     output wire       eth_txck,
     output wire       eth_txctl,
@@ -24,26 +24,25 @@ module eth_rgmii
     output reg        phy_mdio_o,
     output reg        phy_mdio_eo,
     output wire       phy_mdc_o,
-    output reg        eth_irq
+    output reg        eth_irq,
 
+    input  logic    clk_200MHz,
+    input  logic    phy_tx_clk,
+    input  logic    eth_clk
     );
-    
-    logic      clk_200MHz;
-    logic      phy_tx_clk;
-    logic      eth_clk;
      
-    logic 		      eth_en, eth_we;
+    logic           eth_en, eth_we;
     logic [AXI_ADDR_WIDTH-1:0]   eth_addr;
     logic [AXI_DATA_WIDTH-1:0]   eth_wrdata, eth_rdata;
     logic [AXI_DATA_WIDTH/8-1:0] eth_be;
    
-   eth_clk_gen i_eth_clk_gen(
-      .ref_clk_i(clk_i),
-      .rst_ni(rst_ni),
-      .clk_eth_125_o(phy_tx_clk),
-      .clk_eth_125_90_o(eth_clk),
-      .clk_eth_200_o(clk_200MHz)
-    );
+   // eth_clk_gen i_eth_clk_gen(
+   //    .ref_clk_i(clk_i),
+   //    .rst_ni(rst_ni),
+   //    .clk_eth_125_o(phy_tx_clk),
+   //    .clk_eth_125_90_o(eth_clk),
+   //    .clk_eth_200_o(clk_200MHz)
+   //  );
    
   axi2mem 
      #(
